@@ -17,12 +17,13 @@ Open a command prompt or terminal window.
 Navigate to the directory containing the store_creator.py file.
 Run the script by entering python store_creator.py.
 Enter the number of stores you want to create and the group ID(s) of the owner(s) of the shirt and pants you want to use.
-Click the "Create Stores" button.
-The script will automatically join the Coded Clothing Mall V3 game and create the specified number of stores using the shirt and pants of the owner(s) of the specified group ID(s).
+Click the "Create Stores" button. The script will automatically join the Coded Clothing Mall V3 game and create the specified number of stores using the shirt and pants of the owner(s) of the specified group ID(s).
+GUI
+
+The GUI includes a gradient purple background, a title label, entry boxes for the number of stores and group IDs, and start/stop buttons. The start button calls the start_script function and the stop button calls the stop_script function.
 Troubleshooting
 
-If the script does not work, ensure that you have entered the correct gamepass ID, URL prefix for Roblox asset IDs, and place ID of the Coded Clothing Mall V3 game.
-If the script displays an error message, ensure that you have entered the correct group ID(s) and that you have enough group IDs to cover the number of stores you want to create.
+If the script does not work, ensure that you have entered the correct gamepass ID, URL prefix for Roblox asset IDs, and place ID of the Coded Clothing Mall V3 game. If the script displays an error message, ensure that you have entered the correct group ID(s) and that you have enough group IDs to cover the number of stores you want to create.
 Disclaimer
 
 This script is provided for educational purposes only. Use at your own risk. The author is not responsible for any damage or loss caused by the use of this script.
