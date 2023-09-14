@@ -41,6 +41,11 @@ def create_stores(num_stores, group_ids):
                 except:
                     time.sleep(1)
             
+            # Press the E key to claim the store
+            requests.post(f"http://localhost:6463/game/sendkey?playerName={player}&keyCode=Enum.KeyCode.E&isKeyDown=true")
+            time.sleep(0.5)
+            requests.post(f"http://localhost:6463/game/sendkey?playerName={player}&keyCode=Enum.KeyCode.E&isKeyDown=false")
+            
             # Leave the store
             requests.post(f"http://localhost:6463/game/leavegame?playerName={player}")
             time.sleep(1)
@@ -71,6 +76,10 @@ def create_stores(num_stores, group_ids):
             
             # Print the store information
             print(f"Store {i+1} created with Shirt ID {shirt_id} and Pants ID {pants_id} using Group ID {group_id}")
+            
+            # Load the player's store
+            requests.post(f"http://localhost:6463/game/teleportplayer?playerName={player}&placeId=7406897155&spawnName={store}")
+            time.sleep(1)
 
 # Define the function to handle errors
 def handle_error(error):
@@ -95,11 +104,28 @@ def handle_click():
     except Exception as e:
         handle_error(str(e))
 
+# Define the function to start the script
+def start_script():
+    start_button.config(state="disabled")
+    stop_button.config(state="normal")
+    handle_click()
+
+# Define the function to stop the script
+def stop_script():
+    start_button.config(state="normal")
+    stop_button.config(state="disabled")
+
 # Create the main window
 root = tk.Tk()
 root.title("Coded Clothing Mall V3 Store Creator")
-root.geometry("400x300")
-root.configure(bg="#8B5FBF")
+root.geometry("400x400")
+
+# Create the gradient background
+gradient = tk.Canvas(root, width=400, height=400)
+gradient.pack()
+gradient.create_rectangle(0, 0, 400, 400, fill="#8B5FBF", outline="")
+for i in range(400):
+    gradient.create_line(0, i, 400, i, fill=f"#{i:02x}00ff")
 
 # Create the title label
 title_label = tk.Label(root, text="Coded Clothing Mall V3 Store Creator", font=("Arial", 20), bg="#8B5FBF", fg="white")
@@ -116,9 +142,13 @@ group_ids_label.pack()
 group_ids_entry = tk.Entry(root, font=("Arial", 12))
 group_ids_entry.pack(pady=10)
 
-# Create the button
-create_button = tk.Button(root, text="Create Stores", font=("Arial", 12), command=handle_click)
-create_button.pack(pady=20)
+# Create the start/stop buttons
+button_frame = tk.Frame(root, bg="#8B5FBF")
+button_frame.pack(pady=20)
+start_button = tk.Button(button_frame, text="Start", font=("Arial", 12), command=start_script)
+start_button.pack(side=tk.LEFT, padx=10)
+stop_button = tk.Button(button_frame, text="Stop", font=("Arial", 12), command=stop_script, state="disabled")
+stop_button.pack(side=tk.LEFT, padx=10)
 
 # Run the GUI
 root.mainloop()
